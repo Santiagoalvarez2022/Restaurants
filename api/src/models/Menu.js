@@ -14,7 +14,15 @@ module.exports = (sequelize) => {
       allowNull: false,
       unique: true
     },
-
+    ingredients :{
+      type:DataTypes.STRING,
+      
+    },
+    price : {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      
+    }
     
   },
   {timestamps: false}//elimina las propiedades de fecha de creacion y de modificacion

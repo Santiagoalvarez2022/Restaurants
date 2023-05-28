@@ -1,80 +1,14 @@
-//aca debo levantar el servidor 
-
-const express = require("express");
-console.log("=========================>");
-const app = express();
 const PORT = 3001;
-const fs = require("fs");
-const path = require("path");
-const {Sequelize, DataTypes} = require("sequelize")
+const {conn} = require("./src/db") 
+//importo el servidor " app " como "server" 
+const server = require("./src/app")
 
-//coneccion a la bd
-const sequelize = new Sequelize('postgres://postgres:123456789@localhost:5432/restaurants') 
-async function testConnection() {
-    try {
-      await sequelize.authenticate();
-      console.log('Conexión exitosa a la base de datos.');
-    } catch (error) {
-      console.error('Error al conectar a la base de datos:', error);
-    }
-  }
-  
-  testConnection();
-//crear las tablas
+conn.sync({force:true}).then(()=>{
+  server.listen(PORT,()=>{
+    console.log("http://localhost:3001");
+    console.log('%s listening at',PORT); // eslint-disable-line no-console
+
+  })
+})
 
 
-
-
-/* contenedor de los archivos contenidos en la carpeta models */
-const modelDefiners = [];
-/* hace una diferencia de index.js (no seria necesaria en nuestro caso, pero no esta mal ponerlo) */
-const basename = path.basename(__filename);
-
-/* agregamos cada uno de los archivos a un array "modelDefiners" */
-fs.readdirSync(path.join(__dirname, "/models"))
-  .filter(
-    (file) =>
-      file.indexOf(".") !== 0 && file !== basename && file.slice(-3) === ".js"
-  )
-  .forEach((file) => {
-    modelDefiners.push(require(path.join(__dirname, "/models", file)));
-  });
-/* le pasamos por params a cada uno de los modelos definidos en la carpeta models "sequelize" */
-
-modelDefiners.forEach((model) => model(sequelize));
-
-let entries = Object.entries(sequelize.models);
-let capsEntries = entries.map((entry) => [
-  entry[0][0].toUpperCase() + entry[0].slice(1),
-  entry[1],
-]);
-sequelize.models = Object.fromEntries(capsEntries);
-
-
-
-const {Tables, Orders, Menus} = sequelize.models
-
-console.log(sequelize.models);
-
-Tables.hasOne(Orders);
-Orders.hasOne(Tables);
-
-async function createTables() {
-    try {  
-      await sequelize.sync({ force: true }); 
-      console.log('Tablas creadas correctamente.');
-    } catch (error) {
-      console.error('Error al crear las tablas:', error);
-    } 
-  }
-  createTables();
-
-
-
-
-
-app.listen(PORT,  console.log("http://localhost:3001"))
-
-module.exports = {
-    sequelize
-}
