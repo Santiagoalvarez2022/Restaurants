@@ -56,8 +56,7 @@ const {Tables, Orders, Menus} = sequelize.models
 
 
 Tables.hasOne(Orders);
-Orders.hasOne(Tables);
-
+Orders.hasMany(Menus)
   
 
 

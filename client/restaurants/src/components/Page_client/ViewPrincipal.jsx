@@ -3,7 +3,7 @@ import styles from "./styles/ViewPrinvipal.module.css";
 import Table from './Table';
 import axios from 'axios';
 import { useState, useEffect} from 'react';
-
+import { Link } from 'react-router-dom';
 
 export default function ViewPrincipal() {
     const [tables, setTables] = useState([])
@@ -29,10 +29,12 @@ export default function ViewPrincipal() {
                 ? tables.map(table=>{
                     return <div
                     key={table.id}
-                    >
+                    > 
+                    <Link to={`/table/${table.id}` }>
                         <Table 
                          num = {table.id}
-                        />
+                         />
+                    </Link>
                         
                     </div>
                     })
