@@ -1,5 +1,5 @@
 const PORT = 3001;
-const {conn, Tables,Menus} = require("./src/db") 
+const {conn, Tables,Menus,Orders} = require("./src/db") 
 //importo el servidor " app " como "server" 
 const server = require("./src/app")
 
@@ -33,6 +33,8 @@ conn.sync({force:true}).then(()=>{
   await Menus.create({name:menu2.name, ingredients:menu2.ingredients,price:menu2.price});
   
   await Menus.create({name:menu3.name, ingredients:menu3.ingredients,price:menu3.price});
+  await Orders.create({n_table:1, date:"7/09/2002"})
 })
 
 
+ 

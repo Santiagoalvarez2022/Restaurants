@@ -21,26 +21,39 @@ export default function ViewPrincipal() {
 
   return (
     <div className={styles.container}>
-        <h1>Bienvenido a Fratelli</h1>
-        <h2>Porfavor eligé una mesa!  </h2>
-        <div className={styles.tables}>
-            {
-                tables.length 
-                ? tables.map(table=>{
-                    return <div
-                    key={table.id}
-                    > 
-                    <Link to={`/table/${table.id}` }>
-                        <Table 
-                         num = {table.id}
-                         />
-                    </Link>
-                        
-                    </div>
-                    })
-                    : <h3>cargando</h3>
-                }
+        <div className={styles.boxOne}> 
+            <h1 className={styles.title}>Restaurante</h1>
+        </div>
+
+        <div className={styles.boxTwo}>
+            <div className={styles.message}>
+
+                <button>
+                    <Link to="/kitchen" >Ver la cocina</Link>
+                </button>
+                <h2>Porfavor eligé una mesa!  </h2>
             </div>
+            <div className={styles.tables}>
+                {
+                    tables.length 
+                    ? tables.map(table=>{
+                        return <div
+                        className={styles.table}
+                        key={table.id}
+                        > 
+                        <Link to={`/table/${table.id}` }>
+                            <Table 
+                            num = {table.id}
+                            />
+                        </Link>
+                            
+                        </div>
+                        })
+                        : <h3>cargando</h3>
+                    }
+                </div>
+        </div>
+        
     </div>
   )
 }

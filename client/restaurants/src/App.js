@@ -1,10 +1,10 @@
-import logo from './logo.svg';
 import './App.css';
 import React, { useEffect, useState } from "react";
 import axios from "axios"
 import ViewPrincipal from './components/Page_client/ViewPrincipal';
 import {Route} from "react-router-dom";
 import ViewCreateOrder from './components/Page_client/ViewCreateOrder';
+import Kitchen from './components/Page_Admin/Kitchen';
 
 axios.defaults.baseURL =" http://localhost:3001";
 
@@ -19,6 +19,10 @@ function App() {
 
       <Route exact path="/table/:id">
         <ViewCreateOrder />
+      </Route>
+
+      <Route exact path="/kitchen">
+        <Kitchen />
       </Route>
     </div>
   );

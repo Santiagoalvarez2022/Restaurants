@@ -4,7 +4,6 @@ const router_menus  = require("./route_menus");
 const router_tables = require('./route_tables');
 
 const router = Router()
-console.log("esoy en el idex router", router_orders);
 
 router.use("/orders",router_orders )
 router.use("/menus", router_menus)

@@ -1,0 +1,17 @@
+.container{
+    width: 100vw;
+    height: 100vw;
+    background: #8a8f04;
+
+    gap : 1rem 
+}
+.container > div > div{
+    gap : 1rem ;
+    display: flex;
+}
+.orders {
+    background: #000;
+    color: white;
+    display: flex;
+    flex-direction: column;
+}

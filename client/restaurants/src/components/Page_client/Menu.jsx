@@ -1,24 +1,24 @@
-import React from 'react'
 import { useState, useEffect   } from 'react'
 import axios from 'axios'
 import style from "./styles/Menu.module.css"
-export default function () {
 
+
+export default function (props) {
     const [menus, setMenus] = useState([])
+    const [order, setOrder] = useState([]) ;
+    const [totalPrice, setTotal] = useState(0)
     const [newMenu, setNewMenu] = useState({
       name: "",
       ingredients: "",
       price:0
     })
 
-    const [order, setOrder] = useState([]) ;
+    //funcion que hace pide los menus al back y los setea en el estado Menus
     const get_menus = async() =>{
-      let result = await axios("/menus")
-      setMenus(result.data)
-  
+      let {data} = await axios("/menus")
+      setMenus(data)
     }
 
-    const [totalPrice, setTotal] = useState(0)
     
     useEffect(()=>{
       const get_data = async() =>{
@@ -40,58 +40,78 @@ export default function () {
       setNewMenu({...newMenu,[name]:value})
     } 
   
-    const sendData = async (data) =>{
-      // post_menu(data)
-      get_menus()
-    }
-
     //agrego comida a mi pedido 
     const pushFood = (food) =>{
       setOrder([...order, food])
       let price = totalPrice + food.price
       setTotal(price)
-      console.log(food);
     }
 
+    const sendOrder = async () =>{
+      //numero de la mesa
+      const n_table = parseInt(props.n_mesa);
+      //array de ids de las comidas con sus cantidades
+      
+      let obj = {}; // Objeto para contar las ocurrencias de cada ID
+        
+        order.forEach(({id}) => {
+            // Verificar si el ID ya existe en el objeto.
+            // Si existe, se incrementa el contador; de lo contrario, se establece en 1.
+            id in obj ? obj[id]++ : obj[id] = 1;
+        });
+        
+       const array = Object.entries(obj); // Convertir el objeto en un array de pares clave-valor
+      
+       axios.post("/orders",{n_table , food : array})   
 
+      setOrder([])
+      setTotal(0)
+    }
+
+ let count = 0
 
   return (
   <div className={style.container}> 
 
-    <div>
+    <div className={style.containerMenu}>
       <h2>Menu</h2>
-    {
-        menus.length 
-            ? menus.map((food)=>{
-                return <div
-                className={style.food}
-                key = {food.id}
-                onClick={()=>pushFood(food)}
-                >
-                <h2>{food.name}</h2>
-                <h4>{food.ingredients}</h4>
-                <h4>{food.price}</h4>
+      { menus.length 
+              ? menus.map((food)=>{
+                  return <div
+                  className={style.food}
+                  key = {food.id}
+                  onClick={()=>pushFood(food)}
+                  >
+                  <p>{food.name}</p>
+                  <p>{food.ingredients}</p>
+                  <p>{food.price}</p>
 
-                </div>
-            }) 
-            : null 
-    } 
-    <div>
+                  </div>
+              }) 
+              : null} 
     </div>
-    </div>
-    <div>
-      <h2>Pedidos</h2>
+
+    <div className={style.containerOrder} >
+      <div className={style.order}>
       {
         order.map((food) =>{
-          return <div>
-            <h4>{food.name}</h4>
-            <h4>{food.price}</h4>
+          return <div
+          className={style.foodSelected}
+          key = {++count}>
+            <p>{food.name}</p>
+            <p>{food.price}</p>
           </div>
         })
       }
+      </div>
+      
+      <div className={style.actions}>
+
+        <p>Total: {totalPrice} </p>
+        <button onClick={()=>sendOrder()}>Enviar Pedido</button>
+      </div>
     </div>
    
-      <h2>Total: {totalPrice}</h2>
   </div>)
 }
 

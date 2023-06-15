@@ -9,19 +9,15 @@ export default function ViewCreateOrder(props) {
   const {id} = useParams()
   return (
     <div className={style.container}>
-      <div>
+      <div className={style.one}>
         <h1>Mesa Nº {id}</h1>
       </div>
 
-      <div className={style.card}>
-        <div>
-          <div>
-            <h2>Pedido</h2>
-          </div>
-        </div>
-        <div className={style.menuContainer}>
-          <Menu />
-        </div>
+      <div className={style.two}>
+
+          <Menu 
+          n_mesa = {id}
+          />
       </div>
     </div>
   )

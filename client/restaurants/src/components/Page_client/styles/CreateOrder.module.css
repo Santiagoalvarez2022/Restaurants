@@ -1,17 +1,26 @@
 .container{
-    background: rgb(154, 151, 151);
     height: 100vh;
     display: flex;
-    justify-content: center;
-    align-items: center;
     flex-direction: column;
-}
+    background:#2081d8;
 
-.card{
-    width: 70vw;
-    height: 70vh;
-    background: rgb(48, 112, 48);
+}
+.one{
+    height: 10vh;
+    color: #c2e3ed;
+    display: flex;
+    align-items:center;
+    filter: drop-shadow(4px 4px 4px black);
+    padding-inline-start: 1rem;
+}
+.two{
+    height: 90vh;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items:center;
+    border: 2px solid black;
 }
 
 .menuContainer{

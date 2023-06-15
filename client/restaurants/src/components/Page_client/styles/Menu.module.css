@@ -1,20 +1,62 @@
 .container{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-}
+    background: #12233e;
+    height: 80%;
+    width: 90%;
+    display: flex;
+    border-radius: 3rem;
 
-.container > div{
-    overflow-y: scroll;
-    height: 300px ;
 }
-
+.containerMenu{
+    width: 40%;
+    border-radius: 3rem;
+    padding-inline: 1rem;
+    border: 2px solid red;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem ;
+}
+.containerMenu > h2{
+    color:rgb(14, 126, 223);
+}
 .food{
-    border: 2px solid rgb(43, 41, 41); 
-    background: #000;
-    color: antiquewhite;
+    background: #209ed8;
+    display: flex;
+    padding-inline: 1rem;
+}
+.containerOrder{
+    width: 60%;
+
+}
+.order{
+    height: 85%;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    width: 100%;
 }
 
-.food h2, .food h4{
-    padding-bottom: 0; 
-    margin: 0;
+.foodSelected{
+    background: antiquewhite;
+    display: flex;
+    justify-content: space-around;
+}
+.foodSelected > h4{
+    width: 70%;
+    margin-bottom: 0;
+}
+.actions{
+    height: 15%;
+    display: flex;
+    width: 100%; 
+}
+
+.actions > p {
+    color:wheat;
+    width: 60%; 
+}
+.actions > button{
+    width: 40%; 
+    height: 3rem;
+    
 }

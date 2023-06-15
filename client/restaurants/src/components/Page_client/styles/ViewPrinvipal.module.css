@@ -1,14 +1,56 @@
 .container{
-    background: #026075;
     height: 100vh;
     width: 100vw;
+    background: #2081d8; 
+}
+.boxOne{
+    height: 30%;
+    border:solid red 2px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.title{
+    font-size: 4rem;
+    font-style: italic;
+    color: #c2e3ed;
+    filter: drop-shadow(4px 4px 4px black);
 }
 
-.tables{
-    height: 500px;
-    width: 500px;
-    display: grid;
-    gap: 10px;
-    grid-template-columns: repeat(2,1fr);
-    grid-template-rows: repeat(5,1fr);
+.boxTwo{
+    height: 70%;
+    border:solid red 2px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
 }
+.message{
+    height: 20%;
+    border:solid red 2px;
+    display: flex;
+    justify-content: space-around; 
+    flex-direction: column;
+}
+.tables{
+    height: 80%;
+    border:solid red 2px;
+    width: 100%;
+    gap: .5rem;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+}
+
+.table{
+    display: inline-block;
+    height: 100px;
+    max-width: 200px; 
+    background: #1d44bf;
+    color:#efdc6f;
+ 
+}
+
+.table > a{
+    text-decoration: none;
+        color:#efdc6f;
+}
+ 

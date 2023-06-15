@@ -52,14 +52,15 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 
 
-const {Tables, Orders, Menus} = sequelize.models
+const {Tables, Orders, Menus,Orders_Menus} = sequelize.models
 
 
-Tables.hasOne(Orders);
-Orders.hasMany(Menus)
-  
+/*Dog.belongsToMany(Temperament, {through :"dog_temperament"});
 
-
+Temperament.belongsToMany(Dog, {through :"dog_temperament"} );
+  */
+Orders.belongsToMany(Menus, {through:Orders_Menus});
+Menus.belongsToMany(Orders, {through:Orders_Menus});
 
 
 
